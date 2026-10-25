@@ -1,6 +1,6 @@
-# Walima Reception — Arshad & Rizwaana
+# Walima Reception — Arshad & Rizwana
 
-Digital invitation card for the Walima Reception of Arshad & Rizwaana, scheduled for Sunday, 3 January 2027 at Natural Greenz Lawn, Nagpur.
+Digital invitation card for the Walima Reception of Arshad & Rizwana, scheduled for Sunday, 3 January 2027 at Natural Greenz Lawn, Nagpur.
 
 ## Features
 - **Semantic HTML5** & accessible landmarks (`main`, `article`, `time`, `dl`).

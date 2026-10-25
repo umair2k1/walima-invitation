@@ -117,7 +117,7 @@
   <line x1="630" y1="184" x2="820" y2="184" stroke="#c2a05a" stroke-width="1" />
 
   <!-- Couple Names -->
-  <text x="600" y="260" class="names">Arshad <tspan class="names-amp">&amp;</tspan> Rizwaana</text>
+  <text x="600" y="260" class="names">Arshad <tspan class="names-amp">&amp;</tspan> Rizwana</text>
 
   <!-- Invitation Subtext -->
   <text x="600" y="306" class="subtext">Warmly invite you to join in celebrating their wedding reception</text>
