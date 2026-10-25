@@ -1,0 +1,507 @@
+/* ============================================================================
+   Walima Invitation — main.css
+   ----------------------------------------------------------------------------
+   Design tokens live in :root. Change colours, fonts, or the card width here
+   and the whole page follows. No build step, no dependencies.
+   ============================================================================ */
+
+/* ---------- Design tokens ---------- */
+:root {
+  /* Surfaces */
+  --ivory:        #fffdf7;
+  --cream:        #f6eedd;
+  --cream-deep:   #efe3cc;
+
+  /* Principal accent */
+  --maroon:       #5c1a26;
+  --maroon-deep:  #45121b;
+  --maroon-soft:  #7a2b3a;
+
+  /* Gold — --gold is decorative only (borders, ornaments).
+     --gold-ink passes contrast on cream for small text. */
+  --gold:         #c2a05a;
+  --gold-soft:    #e3d0a6;
+  --gold-ink:     #8a6a2e;
+
+  /* Text */
+  --ink:          #33241d;
+  --ink-muted:    #6b5a4e;
+
+  /* Type */
+  --font-serif:   "Cormorant Garamond", "Iowan Old Style", "Palatino Linotype",
+                  Palatino, "Book Antiqua", Georgia, serif;
+  --font-arabic:  "Amiri", "Scheherazade New", "Traditional Arabic", serif;
+
+  /* Metrics */
+  --card-max:     680px;
+  --radius:       4px;
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body,
+h1, p, dl, dd, dt, figure { margin: 0; }
+
+/* ---------- Page shell ---------- */
+html,
+body {
+  min-height: 100%;
+  overflow-x: hidden; /* belt-and-braces against stray decorative overflow */
+}
+
+body {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(circle at 50% -10%, rgba(194, 160, 90, 0.20), transparent 55%),
+    radial-gradient(circle at 50% 115%, rgba(92, 26, 38, 0.10), transparent 60%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- Layout ---------- */
+.page {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(0.75rem, 3vw, 2.5rem);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* ---------- The invitation card ---------- */
+.card {
+  position: relative;
+  width: 100%;
+  max-width: var(--card-max);
+  padding: clamp(1.9rem, 7vw, 3.5rem) clamp(1.25rem, 6vw, 3.25rem);
+  margin: auto;
+  text-align: center;
+  background-color: var(--ivory);
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.6), transparent 40%),
+    radial-gradient(circle at 50% 0%, rgba(194, 160, 90, 0.08), transparent 70%);
+  border: 1px solid var(--gold-soft);
+  border-radius: var(--radius);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 18px 45px -20px rgba(69, 18, 27, 0.35),
+    0 2px 6px rgba(69, 18, 27, 0.06);
+}
+
+/* Inner hairline frame — a second gold rule, offset from the edge */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(194, 160, 90, 0.45);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* ---------- Corner motifs (decorative only) ---------- */
+.corner {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  pointer-events: none;
+}
+
+.corner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 0 solid var(--gold);
+}
+
+/* Tiny diamond at each corner joint */
+.corner::after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+.corner--tl { top: 14px; left: 14px; }
+.corner--tl::before { inset: 0 auto auto 0; width: 100%; height: 100%;
+  border-top-width: 1px; border-left-width: 1px; }
+.corner--tl::after { top: 10px; left: -3px; }
+
+.corner--tr { top: 14px; right: 14px; }
+.corner--tr::before { inset: 0 0 auto auto; width: 100%; height: 100%;
+  border-top-width: 1px; border-right-width: 1px; }
+.corner--tr::after { top: 10px; right: -3px; }
+
+.corner--br { bottom: 14px; right: 14px; }
+.corner--br::before { inset: auto 0 0 auto; width: 100%; height: 100%;
+  border-bottom-width: 1px; border-right-width: 1px; }
+.corner--br::after { bottom: 10px; right: -3px; }
+
+.corner--bl { bottom: 14px; left: 14px; }
+.corner--bl::before { inset: auto auto 0 0; width: 100%; height: 100%;
+  border-bottom-width: 1px; border-left-width: 1px; }
+.corner--bl::after { bottom: 10px; left: -3px; }
+
+/* ---------- Bismillah ---------- */
+.bismillah {
+  font-family: var(--font-arabic);
+  font-size: clamp(1.5rem, 1.1rem + 2.2vw, 2.05rem);
+  line-height: 2;          /* room for Arabic diacritics above and below */
+  font-weight: 400;
+  color: var(--maroon);
+  letter-spacing: 0;
+  margin-bottom: clamp(0.35rem, 2vw, 0.75rem);
+}
+
+/* ---------- Divider rule with centre diamond ---------- */
+.rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: clamp(1rem, 3.5vw, 1.5rem) auto;
+  max-width: 340px;
+}
+
+.rule::before,
+.rule::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.rule__diamond {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+
+/* ---------- Title block ---------- */
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.3rem, 1.5vw, 0.6rem);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--maroon);
+}
+
+.title__event {
+  font-size: clamp(0.78rem, 0.7rem + 0.5vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  /* Optical compensation: letter-spacing adds trailing space after last glyph */
+  text-indent: 0.32em;
+}
+
+.title__names {
+  font-size: clamp(2rem, 1.3rem + 4.4vw, 3.35rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
+}
+
+.title__amp {
+  font-style: italic;
+  color: var(--gold-ink);
+  padding: 0 0.05em;
+}
+
+/* ---------- Invitation message ---------- */
+.lede {
+  max-width: 34ch;
+  margin: clamp(0.9rem, 3vw, 1.35rem) auto 0;
+  font-size: clamp(1rem, 0.94rem + 0.35vw, 1.15rem);
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--ink-muted);
+  text-wrap: pretty;
+}
+
+/* ---------- Event details ---------- */
+.details {
+  display: grid;
+  gap: clamp(0.85rem, 3vw, 1.25rem);
+  margin: 0 auto;
+  max-width: 30rem;
+}
+
+.detail dt {
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  text-indent: 0.24em;
+  margin-bottom: 0.15rem;
+}
+
+.detail dd {
+  font-size: clamp(1.02rem, 0.96rem + 0.35vw, 1.18rem);
+  line-height: 1.5;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.detail .venue {
+  display: block;
+  font-size: 1.08em;
+  font-weight: 600;
+  color: var(--maroon);
+  letter-spacing: 0.01em;
+}
+
+.muted {
+  font-size: 0.85em;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+/* ---------- Actions ---------- */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: clamp(1.5rem, 5vw, 2.25rem);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* ≥ 48px tall for comfortable touch targets */
+  min-height: 48px;
+  padding: 0.7rem 1.5rem;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 999px;
+  border: 1px solid var(--maroon);
+  transition: background-color 0.18s ease, color 0.18s ease,
+              box-shadow 0.18s ease, transform 0.18s ease;
+  /* Full-width stacked buttons on narrow screens */
+  flex: 1 1 12rem;
+}
+
+.btn--primary {
+  background-color: var(--maroon);
+  color: var(--ivory);
+  box-shadow: 0 6px 16px -8px rgba(69, 18, 27, 0.7);
+}
+
+.btn--primary:hover {
+  background-color: var(--maroon-deep);
+  box-shadow: 0 8px 20px -8px rgba(69, 18, 27, 0.8);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  color: var(--maroon);
+}
+
+.btn--ghost:hover {
+  background-color: rgba(92, 26, 38, 0.07);
+}
+
+.btn:active { transform: translateY(1px); }
+
+/* Visible, high-contrast keyboard focus for every interactive element */
+.btn:focus-visible {
+  outline: 3px solid var(--gold-ink);
+  outline-offset: 3px;
+}
+
+/* ---------- Host attribution ---------- */
+.hosted {
+  margin-top: clamp(1.75rem, 5vw, 2.5rem);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--ink-muted);
+}
+
+.hosted__family {
+  display: inline-block;
+  margin-top: 0.2rem;
+  font-size: 1.15em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--maroon);
+}
+
+/* ---------- Decorative petals ---------- */
+.petals {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.petals span {
+  position: absolute;
+  top: -8vh;
+  width: 10px;
+  height: 10px;
+  /* Soft petal/leaf silhouette */
+  border-radius: 60% 0 60% 0;
+  background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+  opacity: 0;
+  animation: petal-fall linear infinite;
+  will-change: transform, opacity;
+}
+
+/* Varied timing, position, size, and tint so the fall looks natural */
+.petals span:nth-child(1)  { left: 6%;  animation-duration: 19s; animation-delay: 0s;    transform: scale(1);    }
+.petals span:nth-child(2)  { left: 17%; animation-duration: 24s; animation-delay: 3s;    transform: scale(0.7);  background: linear-gradient(135deg, #e8d3c2, var(--gold)); }
+.petals span:nth-child(3)  { left: 28%; animation-duration: 21s; animation-delay: 7s;    transform: scale(1.2);  }
+.petals span:nth-child(4)  { left: 39%; animation-duration: 27s; animation-delay: 1.5s;  transform: scale(0.85); background: linear-gradient(135deg, #e5c6c6, var(--maroon-soft)); }
+.petals span:nth-child(5)  { left: 48%; animation-duration: 18s; animation-delay: 9s;    transform: scale(1.05); }
+.petals span:nth-child(6)  { left: 58%; animation-duration: 25s; animation-delay: 4.5s;  transform: scale(0.75); background: linear-gradient(135deg, #e8d3c2, var(--gold)); }
+.petals span:nth-child(7)  { left: 68%; animation-duration: 22s; animation-delay: 12s;   transform: scale(1.1);  }
+.petals span:nth-child(8)  { left: 77%; animation-duration: 28s; animation-delay: 2s;    transform: scale(0.9);  background: linear-gradient(135deg, #e5c6c6, var(--maroon-soft)); }
+.petals span:nth-child(9)  { left: 86%; animation-duration: 20s; animation-delay: 6s;    transform: scale(1.15); }
+.petals span:nth-child(10) { left: 94%; animation-duration: 26s; animation-delay: 10s;   transform: scale(0.8);  }
+
+@keyframes petal-fall {
+  0%   { opacity: 0;    transform: translate3d(0, 0, 0) rotate(0deg); }
+  8%   { opacity: 0.55; }
+  50%  {                transform: translate3d(28px, 55vh, 0) rotate(200deg); }
+  92%  { opacity: 0.4; }
+  100% { opacity: 0;    transform: translate3d(-18px, 118vh, 0) rotate(400deg); }
+}
+
+/* ---------- Screen-reader-only utility ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================================
+   Responsive adjustments
+   ============================================================================ */
+
+/* Side-by-side actions once there is room */
+@media (min-width: 30em) {
+  .actions { gap: 0.9rem; }
+  .btn { flex: 0 1 auto; }
+}
+
+/* Slightly larger corner motifs on bigger screens */
+@media (min-width: 40em) {
+  .corner { width: 56px; height: 56px; }
+  .corner--tl { top: 16px; left: 16px; }
+  .corner--tr { top: 16px; right: 16px; }
+  .corner--br { bottom: 16px; right: 16px; }
+  .corner--bl { bottom: 16px; left: 16px; }
+  .corner--tl::after { top: 12px; left: -3px; }
+  .corner--tr::after { top: 12px; right: -3px; }
+  .corner--br::after { bottom: 12px; right: -3px; }
+  .corner--bl::after { bottom: 12px; left: -3px; }
+}
+
+/* Very short viewports (e.g. landscape phones): tighten vertical rhythm */
+@media (max-height: 560px) and (min-width: 40em) {
+  .page { padding-block: 0.5rem; }
+  .card { padding-block: 1.5rem; }
+  .rule { margin-block: 0.6rem; }
+  .actions { margin-top: 1rem; }
+  .hosted { margin-top: 1rem; }
+}
+
+/* ============================================================================
+   User preferences
+   ============================================================================ */
+
+/* Reduce motion: stop petals and remove all transitions/transforms.
+   Core invitation content is unaffected. */
+@media (prefers-reduced-motion: reduce) {
+  .petals { display: none; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .btn:active { transform: none; }
+}
+
+/* Windows High Contrast / forced colours */
+@media (forced-colors: active) {
+  .card,
+  .card::before,
+  .corner::before { border-color: CanvasText; }
+
+  .corner::after,
+  .rule__diamond { background: CanvasText; }
+
+  .btn { border-color: CanvasText; }
+  .btn--primary { background: CanvasText; color: Canvas; }
+  .petals { display: none; }
+}
+
+/* ============================================================================
+   Print — clean, ink-friendly, one page if possible
+   ============================================================================ */
+@media print {
+  @page { margin: 12mm; }
+
+  body {
+    background: #fff;
+    background-image: none;
+    color: #000;
+    font-size: 12pt;
+  }
+
+  .petals,
+  .actions { display: none; }
+
+  .page { padding: 0; min-height: auto; }
+
+  .card {
+    max-width: none;
+    box-shadow: none;
+    border: 1px solid #999;
+    background: #fff;
+  }
+
+  .title__event,
+  .detail dt,
+  .title__amp,
+  .hosted__family { color: #000; }
+}
